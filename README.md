@@ -1,3 +1,8 @@
+=======
+Workout-Tracker
+===============
+
+
 # Angular Express Seed
 
 Start an awesome app with AngularJS on the front, Express + Node on the back. This project is an
@@ -79,3 +84,5 @@ your friends.
 
 ## License
 MIT
+
+
