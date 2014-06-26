@@ -11,6 +11,7 @@ var express = require('express'),
   routes = require('./routes'),
   api = require('./routes/api'),
   http = require('http'),
+  db = require('./models/db'),
   path = require('path');
 
 var app = module.exports = express();
@@ -53,6 +54,8 @@ app.get('/partials/:name', routes.partials);
 
 // JSON API
 app.get('/api/name', api.name);
+app.get('/api/muscles', api.muscles);
+app.get('/api/exercises', api.getExercisesStats);
 
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);

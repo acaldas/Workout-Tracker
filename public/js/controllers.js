@@ -2,26 +2,68 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', []).
-  controller('AppCtrl', function ($scope, $http) {
+angular.module('myApp.controllers', [])
+  .controller('Workout', ['$scope', '$timeout', '$http', function($scope, $timeout, $http) {
 
-    $http({
+
+  }])
+  .controller('Progress', ['$scope', '$http', function($scope, $http) {
+     $scope.currentTab = 0;
+    $scope.exercises = [];
+    $scope.exerciseData = [];
+        $http({
       method: 'GET',
-      url: '/api/name'
+      url: '/api/exercises'
     }).
     success(function (data, status, headers, config) {
-      $scope.name = data.name;
-    }).
-    error(function (data, status, headers, config) {
-      $scope.name = 'Error!';
-    });
+       $scope.exerciseData = data;
+       data.forEach(function (exercise, index){
+        var tab = {
+          title: exercise.name,
+          index: index
+        };
+        if(index===0)
+          tab.active = true;
+        $scope.exercises.push(tab);
+      });
+       $scope.drawGraph(0);
+     });
 
-  }).
-  controller('MyCtrl1', function ($scope) {
-    // write Ctrl here
+  $scope.isActiveTab = function isActiveTab(i) {
+    return i === $scope.currentTab;
+  }
 
-  }).
-  controller('MyCtrl2', function ($scope) {
-    // write Ctrl here
+  $scope.drawGraph = function drawGraph(i){
 
-  });
+    if($scope.exerciseData.length > i) {
+      $scope.currentTab = i;
+          $scope.data = {
+      series: [],
+      data : []
+    };
+    var exercise = $scope.exerciseData[i];
+        $scope.data.series.push(exercise.name);
+        exercise.graph.forEach(function (ex){
+         $scope.data.data.push({
+          "x": ex.added,
+          "y": [ex.weight],
+          tooltip: exercise.name
+        });
+        })
+    }
+  };
+
+  $scope.chartType = 'line';
+
+  $scope.config = {
+    labels: false,
+    title : "Progress",
+    legend : {
+      display:true,
+      position:'left'
+    },
+    innerRadius: 0
+  };
+
+  }])
+ .controller('Measures', ['$scope', function($scope) {}]);

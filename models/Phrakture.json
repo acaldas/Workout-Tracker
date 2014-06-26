@@ -1,0 +1,113 @@
+{
+    "Workout": {
+        "name":"Phrakture's Greyskull LP",
+        "Weeks": {
+            "Week":{
+                "Day":{
+                    "Exercise": {
+                    "name": "Overhead Press",
+                    "sets": 3,
+                    "reps": 5
+                    },
+                    "Exercise": {
+                    "exercise": "Bicep Curls",
+                    "sets": 3,
+                    "reps": 8
+                    },
+                    "Exercise": {
+                    "exercise": "Squat",
+                    "sets": 3,
+                    "reps": 5
+                    }
+                },
+                "Day": {
+                    "Exercise": {
+                    "name": "Bench Press",
+                    "sets": 3,
+                    "reps": 5
+                    },
+                    "Exercise": {
+                    "name": "Barbell Rows",
+                    "sets": 3,
+                    "reps": 5
+                    },
+                    "Exercise": {
+                    "name": "Squat",
+                    "sets": 3,
+                    "reps": 5
+                    }
+                },
+                "Day": {
+                    "Exercise": {
+                    "name": "Overhead Press",
+                    "sets": 3,
+                    "reps": 5
+                    },
+                    "Exercise": {
+                    "name": "Bicep Curls",
+                    "sets": 3,
+                    "reps": 8
+                    },
+                    "Exercise": {
+                    "name": "Squat",
+                    "sets": 3,
+                    "reps": 5
+                    }
+                }
+            },
+            "Week":  {
+                "Day": {
+                    "Exercise": {
+                    "name": "Bench Press",
+                    "sets": 3,
+                    "reps": 5
+                    },
+                    "Exercise":  {
+                    "name": "Barbell Rows",
+                    "sets": 3,
+                    "reps": 5
+                    },
+                    "Exercise": {
+                    "name": "Squat",
+                    "sets": 3,
+                    "reps": 5
+                    }
+                },
+                "Day": {
+                    "Exercise":{
+                    "name": "Overhead Press",
+                    "sets": 3,
+                    "reps": 5
+                    },
+                    "Exercise": {
+                    "name": "Bicep Curls",
+                    "sets": 3,
+                    "reps": 8
+                    },
+                    "Exercise":{
+                    "name": "Squat",
+                    "sets": 3,
+                    "reps": 5
+                    }
+                },
+                "Day": {
+                    "Exercise": {
+                    "name": "Bench Press",
+                    "sets": 3,
+                    "reps": 5
+                    },
+                    "Exercise":  {
+                    "name": "Barbell Rows",
+                    "sets": 3,
+                    "reps": 5
+                    },
+                    "Exercise":   {
+                    "name": "Squat",
+                    "sets": 3,
+                    "reps": 5
+                    }
+                }
+            }
+        }
+    }
+}

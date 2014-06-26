@@ -1,30 +1,113 @@
 /* app css stylesheet */
 
-.menu {
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: transparent;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.main {
+  margin-top:100px;
+}
+
+.side{
+  padding:0px;
+
+  color: #C5AD64;
+  -webkit-text-stroke: 1px rgba(240,211,121,0.6);
+}
+
+.side h1 {
+  margin-top:0px;
+  font-size: px;
+  font-weight: 700;
+  text-align: center;
+}
+.tabs {
+  background: rgba(83,74,67,0.3);
+  border-radius: 4px;
+  border: 1px solid rgba(95,91,86,0.5);
+}
+
+.tabs ul {
+  padding: 0px;
   list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+  margin-bottom: 0px;
 }
 
-.menu:before {
-  content: "[";
+.tabs li {
+  padding: 10px 0px 10px 65px;
+  transition: background-color 0.3s ease;
+  background: url('../images/gymnast4.png') no-repeat;
+  background-position:25px 9px;
 }
 
-.menu:after {
-  content: "]";
+.tabs li:first-child {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  background: url('../images/dumbbell.png') no-repeat;
+  background-position:25px 9px;
 }
 
-.menu > li {
-  display: inline;
+.tabs li:last-child {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+    background: url('../images/temperature1.png') no-repeat;
+  background-position:25px 9px;
 }
 
-.menu > li:before {
-  content: "|";
-  padding-right: 0.3em;
+.separator {
+  height: 1px;
+  width:90%;
+  border-bottom: 1px solid #111;
+}
+.tabs li:hover {
+  background-color: #ECECEC;
 }
 
-.menu > li:nth-child(1):before {
-  content: "";
-  padding: 0;
+.tabs li:hover a {
+  color: rgba(150,132,76,0.9);
 }
+.tabs li a {
+  font-size: 18px;
+  color: #C5AD64;
+  -webkit-text-stroke: 1px rgba(240,211,121,0.6);
+  transition: color 0.3s ease;
+  display:block;
+}
+
+.tabs li a {
+  text-decoration: none;
+}
+
+.line-separator{
+  height:1px;
+  width: 90%;
+  margin: auto;
+  border-bottom:1px solid rgba(71,67,63,0.3);
+}
+
+.content {
+  background-color: #ECECEC;
+  padding: 30px;
+}
+
+.round {
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+}
+
+.shadow {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+html {
+  background: url('../images/blur-background12.jpg') no-repeat;
+  background-size: cover;
+};

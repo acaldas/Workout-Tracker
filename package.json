@@ -9,6 +9,13 @@
     "jade": "*",
     "method-override": "*",
     "morgan": "*",
-    "ejs": "~1.0.0"
+    "ejs": "~1.0.0",
+    "mongoose": "~3.8.12",
+    "xlsx-extract": "0.0.4",
+    "nodemon": "~1.2.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-wiredep": "~1.8.0"
   }
 }
