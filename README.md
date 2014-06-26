@@ -1,4 +1,3 @@
-=======
 Workout-Tracker
 ===============
 
@@ -40,7 +39,7 @@ Just fetch the changes and merge them into your project with git.
 
 
 ## Directory Layout
-    
+
     app.js              --> app config
     package.json        --> for npm
     public/             --> all of the files to be used in on the client side
@@ -84,5 +83,3 @@ your friends.
 
 ## License
 MIT
-
-
