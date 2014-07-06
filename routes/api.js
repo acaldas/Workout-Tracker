@@ -36,9 +36,17 @@ exports.getExercisesStats = function (req, res) {
 }
 
 var workoutdata = require('../models/workout');
-exports.getWorkoutDay = function (req, res) {
+exports.getWorkout = function (req, res) {
 
  workoutdata.getWorkoutDay(function(err,result){
+  res.json({
+    result: result
+  });
+ });
+};
+
+exports.saveWorkout = function (req, res) {
+  workoutdata.saveWorkout(req.body.workout,function(err,result){
   res.json({
     name: "result",
     result: result

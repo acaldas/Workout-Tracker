@@ -12,26 +12,31 @@ body {
 }
 
 .main {
-  margin-top:100px;
+  margin-top:10px;
 }
 
 .side{
   padding:0px;
+}
 
+.header {
+  width: 100%;
+}
+.header h1 {
+  margin:0px 0px 20px 0px;
+  padding: 20px 0px;
+  font-size: 86px;
+  font-weight: 700;
+  text-align: center;
   color: #C5AD64;
   -webkit-text-stroke: 1px rgba(240,211,121,0.6);
 }
 
-.side h1 {
-  margin-top:0px;
-  font-size: px;
-  font-weight: 700;
-  text-align: center;
-}
 .tabs {
   background: rgba(83,74,67,0.3);
   border-radius: 4px;
   border: 1px solid rgba(95,91,86,0.5);
+  margin-top:10px;
 }
 
 .tabs ul {
@@ -70,7 +75,7 @@ body {
   background-color: #ECECEC;
 }
 
-.tabs li:hover a {
+.tabs+#current, .tabs li:hover a {
   color: rgba(150,132,76,0.9);
 }
 .tabs li a {
@@ -97,6 +102,141 @@ body {
   padding: 30px;
 }
 
+.progress {
+   background-color: rgba(0,0,0,0.2);
+   height: 100%;
+   margin: 0 auto;
+}
+
+
+.graphSelector {
+  padding: 0px 38px 0px 0px;
+  float: right;
+  }
+
+.graphSelector ul {
+  list-style: none;
+  padding: 0px;
+  margin-top: 10px;
+}
+
+.graphSelector li {
+  padding: 17px 10px 17px 30px;
+  border-bottom: 1px solid rgba(95,91,86,0.1);
+  font-size: 18px;
+  background-color: rgba(250,250,250,0.5);
+}
+
+.graphSelector li:last-child {
+  border-bottom: none;
+  padding-bottom: 18px;
+}
+
+/* ROUNDED ONE */
+.roundedOne {
+  width: 28px;
+  height: 28px;
+  background: #fcfff4;
+
+  background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  background: -o-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  background: -ms-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 );
+  float:left;
+  margin: 0px 10px 0px -15px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+
+  -webkit-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+  -moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+  box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+  position: relative;
+}
+
+.roundedOne label {
+  cursor: pointer;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  left: 4px;
+  top: 4px;
+
+  -webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,1);
+  -moz-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,1);
+  box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,1);
+
+  background: -webkit-linear-gradient(top, #222 0%, #45484d 100%);
+  background: -moz-linear-gradient(top, #222 0%, #45484d 100%);
+  background: -o-linear-gradient(top, #222 0%, #45484d 100%);
+  background: -ms-linear-gradient(top, #222 0%, #45484d 100%);
+  background: linear-gradient(top, #222 0%, #45484d 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222', endColorstr='#45484d',GradientType=0 );
+}
+
+.active .roundedOne label, .roundedOne:hover label{
+  background: rgba(240,211,121,0.8);
+  box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5);
+}
+
+.graph canvas {
+  padding: 2px 5px 5px 0px;
+}
+
+.graph{
+  float:left;
+  margin: 10px 0px 10px 20px;
+  border-radius: 4px;
+  background-color: rgba(250,250,250,0.7);
+}
+
+
+/*-----------------------------WORKOUT-----------------------------*/
+.workoutForm {
+  padding-left: 20px;
+}
+
+.workoutForm h3 {
+  font-size: 18px;
+}
+.workoutForm .col-lg-2 {
+  padding: 0 0;
+  margin-left: -50px;
+}
+.workoutForm .col-lg-2:first-child {
+  margin-left: 10px;
+}
+
+.workoutForm .col-lg-2:last-child {
+  margin-left: -65px;
+}
+
+.exerciseRow {
+  padding-left: 7px;
+}
+
+.exerciseRow input {
+  width:3em;
+  padding: 1px 5px;
+}
+
+.exerciseWeight {
+  margin-left: -20px;
+}
+
+.exerciseWeight input{
+  margin-left: -10px;
+}
+
+.exerciseReps {
+  margin-left: -60px;
+}
 .round {
   -webkit-border-radius: 12px;
   -moz-border-radius: 12px;

@@ -32,7 +32,7 @@
     "angular-bootstrap": "https://github.com/angular-ui/bootstrap-bower.git#~0.11.0",
     "angular-resource": "~1.2.18",
     "modernizr": "~2.8.2",
-    "angular-charts": "~0.2.3"
+    "angles": "*"
   },
   "resolutions": {
     "angular": "~1.x"

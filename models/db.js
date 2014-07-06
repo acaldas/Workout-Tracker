@@ -19,6 +19,7 @@ mongoose.model( 'Exercise', exerciseSchema );
 
 var workoutSchema = new mongoose.Schema ({
     date: Date,
+    type: Number,
     exercises: [exerciseSchema]
 });
 mongoose.model( 'Workout', workoutSchema );

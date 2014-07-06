@@ -56,6 +56,8 @@ app.get('/partials/:name', routes.partials);
 app.get('/api/name', api.name);
 app.get('/api/muscles', api.muscles);
 app.get('/api/exercises', api.getExercisesStats);
+app.get('/api/getWorkout', api.getWorkout);
+app.post('/api/saveWorkout', api.saveWorkout);
 
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);

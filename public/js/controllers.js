@@ -5,10 +5,51 @@
 angular.module('myApp.controllers', [])
   .controller('Workout', ['$scope', '$timeout', '$http', function($scope, $timeout, $http) {
 
+    $scope.workout = {};
 
+    function getWorkout() {
+      $http({
+      method: 'GET',
+      url: '/api/getWorkout'
+    }).
+    success(function (data, status, headers, config) {
+      $scope.workout = data.result;
+      console.log(data);
+     })
+  };
+
+  getWorkout();
+    $scope.saveWorkout = function saveWorkout() { $http({
+      method: 'POST',
+      url: '/api/saveWorkout',
+      data: { 'workout' : $scope.workout }
+    }).
+    success(function (data, status, headers, config) {
+      console.log(data);
+      getWorkout();
+     })
+  };
   }])
   .controller('Progress', ['$scope', '$http', function($scope, $http) {
-     $scope.currentTab = 0;
+    $scope.currentTab = 0;
+    $scope.chart = {
+        labels : [],
+        datasets : [
+            {
+                fillColor : "rgba(151,187,205,0)",
+                strokeColor : "rgba(240,211,121,1)",
+                pointColor : "rgba(240,211,121,1)",
+                pointStrokeColor : "rgba(240,211,121,0.1)",
+                data : []
+            }
+        ],
+    };
+
+    $scope.options = {
+      scaleStepWidth : 1,
+        bezierCurve : false
+    }
+
     $scope.exercises = [];
     $scope.exerciseData = [];
         $http({
@@ -35,35 +76,15 @@ angular.module('myApp.controllers', [])
 
   $scope.drawGraph = function drawGraph(i){
 
-    if($scope.exerciseData.length > i) {
-      $scope.currentTab = i;
-          $scope.data = {
-      series: [],
-      data : []
-    };
     var exercise = $scope.exerciseData[i];
-        $scope.data.series.push(exercise.name);
-        exercise.graph.forEach(function (ex){
-         $scope.data.data.push({
-          "x": ex.added,
-          "y": [ex.weight],
-          tooltip: exercise.name
-        });
-        })
-    }
+    $scope.chart.labels = [];
+    $scope.chart.datasets[0].data = [];
+
+    exercise.graph.forEach(function(day) {
+      $scope.chart.labels.push(day.added);
+      $scope.chart.datasets[0].data.push(day.weight);
+    });
+    $scope.currentTab = i;
   };
-
-  $scope.chartType = 'line';
-
-  $scope.config = {
-    labels: false,
-    title : "Progress",
-    legend : {
-      display:true,
-      position:'left'
-    },
-    innerRadius: 0
-  };
-
   }])
  .controller('Measures', ['$scope', function($scope) {}]);

@@ -8,7 +8,7 @@ angular.module('myApp', [
   'myApp.services',
   'myApp.directives',
   'myApp.controllers',
-  'angularCharts'
+  'angles'
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/workout', {templateUrl: 'partials/workout.html', controller: 'Workout'});

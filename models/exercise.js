@@ -42,8 +42,7 @@ exports.getExercisesStats = function getExercisesStats(callback) {
                     callback(graphs);
               }});
     });
-
-    }
+}
 
 exports.importExcell = function importExcell(callback){
     var Workout = mongoose.model( 'Workout' );
