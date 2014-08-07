@@ -1,4 +1,5 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+    _ = require('underscore');
 
 var exercises = ["Squat","Bench Press", "Overhead Press", "Deadlift", "Barbell Row", "Bicep Curls"];
 exports.saveExercise = function saveExercise(exercise,callback){
@@ -25,22 +26,47 @@ exports.getExercisesStats = function getExercisesStats(callback) {
     exercises.forEach(function (exercise, index) {
         var data = [];
 
-        Exercise.find({name: exercise}).sort('added').exec( function(err, result) {
-                if(err){
-                console.log(err);
-              } else {
-                result.forEach(function (ex) {
-                    data.push(
-                    {
-                       added: ex.added,
-                       weight: ex.weight
-                    });
-                });
-                graphs.push({name: exercise, graph: data});
-                n++;
-                if(n === exercises.length-1)
-                    callback(graphs);
-              }});
+        var Workout = mongoose.model( 'Workout' );
+        Workout.find().sort('date').exec( function (err,result) {
+          if(err){
+            console.log(err);
+          } else {
+            var workouts = _.pluck(result, 'exercises');
+          Exercise.find({name: exercise}).sort('added').exec( function(err, result) {
+                  if(err){
+                  console.log(err);
+                } else {
+                  var last_added = 0;
+                  result.forEach(function (ex) {
+                      data.push(
+                      {
+                         added: ex.added,
+                         weight: ex.weight
+                      });
+                      if(ex.added > last_added)
+                        last_added = ex.added;
+                  });
+                  var recentWorkouts = [];
+                  _.each(workouts, function(workout) {
+
+                    var ex = _.find(workout, function(ex){return ex.name === exercise});
+                    if(ex) {
+                      data.push({
+                        added: last_added,
+                        weight: ex.weight,
+                        date: ex.date
+                      });
+                      last_added++;
+                       console.log(last_added);
+                    }
+                  });
+
+                  graphs.push({name: exercise, graph: data});
+                  n++;
+                  if(n === exercises.length-1)
+                      callback(graphs);
+                }});
+         }});
     });
 }
 

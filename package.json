@@ -13,7 +13,8 @@
     "mongoose": "~3.8.12",
     "xlsx-extract": "0.0.4",
     "nodemon": "~1.2.0",
-    "q": "~1.0.1"
+    "q": "~1.0.1",
+    "underscore": "~1.6.0"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
