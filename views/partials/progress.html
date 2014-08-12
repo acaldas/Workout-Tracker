@@ -1,17 +1,20 @@
+<form name="measuresForm">
+    <div class="row workoutForm">
+      <div class="col-lg-2">
+        <h3>Exercise</h3>
+      </div>
+      <div class="col-lg-2">
+        <h3>Weight</h3>
+      </div>
+      <div class="col-lg-2">
+        <h3>Last Rep</h3>
+      </div>
+    </div>
+      <div class="row exerciseRow" ng-repeat="exercise in workout.exercises">
+        <p class="exerciseName col-lg-2">{{exercise.name}}</p>
+        <div class="exerciseWeight col-lg-2"><edit-click ng-model="exercise.weight"></edit-click></div>
+        <input class="exerciseReps col-lg-2" type="number" ng-model="exercise.lastReps"/>
+      </div>
 
-  <div class="progress">
-  <div class="graph lg-col-4">
-    <canvas linechart options="options" data="chart" width="500" height="500"></canvas>
-  </div>
-  <div class="graphSelector">
-   <ul>
-    <li ng-repeat="tab in exercises"
-        ng-class="{active:isActiveTab(tab.index)}"
-        ng-click="drawGraph(tab.index)">
-        <div class="roundedOne">
-            <label for="roundedOne"></label>
-        </div>
-        {{tab.title}}</li>
-  </ul>
-  </div>
-  </div>
+      <button type="submit" class="btn btn-default" ng-click="saveWorkout()">Submit</button>
+    </form>

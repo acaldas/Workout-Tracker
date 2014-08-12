@@ -87,4 +87,28 @@ angular.module('myApp.controllers', [])
     $scope.currentTab = i;
   };
   }])
- .controller('Measures', ['$scope', function($scope) {}]);
+ .controller('Measures', ['$scope', '$http', function($scope, $http) {
+
+
+      $http({
+      method: 'GET',
+      url: '/api/getLastMeasure'
+    }).
+    success(function (data, status, headers, config) {
+      console.log(data);
+      $scope.measures = data.result;
+    });
+
+    $scope.saveMeasures = function saveMeasures() {
+      delete $scope.measures._id;
+      $http({
+      method: 'POST',
+      url: '/api/saveMeasures',
+      data: { 'measures' : $scope.measures }
+    }).
+    success(function (data, status, headers, config) {
+      console.log(data);
+     });
+  };
+
+ }]);

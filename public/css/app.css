@@ -237,6 +237,24 @@ body {
 .exerciseReps {
   margin-left: -60px;
 }
+
+
+/* --------------  Measures --------------- */
+
+#submitMeasures {
+  margin-left: 15px;
+}
+
+.measuresForm .field{
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.measuresForm .field input {
+  width: 80%;
+  margin: auto;
+}
+
 .round {
   -webkit-border-radius: 12px;
   -moz-border-radius: 12px;

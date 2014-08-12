@@ -63,3 +63,22 @@ exports.importExcell = function (req, res) {
   });
  });
 };
+
+var measuresdata = require('../models/measures');
+exports.getLastMeasure = function (req, res) {
+
+ measuresdata.getLastMeasure().then(function(result){
+  res.json({
+    result: result
+  });
+ });
+};
+
+exports.saveMeasures = function (req, res) {
+  measuresdata.saveMeasures(req.body.measures).then(function(result){
+  res.json({
+    name: "result",
+    result: result
+  });
+ });
+};

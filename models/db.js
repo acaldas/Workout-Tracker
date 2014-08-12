@@ -24,4 +24,13 @@ var workoutSchema = new mongoose.Schema ({
 });
 mongoose.model( 'Workout', workoutSchema );
 
+var measuresSchema = new mongoose.Schema ({
+    date: Date,
+    weight: Number,
+    fat: Number,
+    muscle: Number,
+    water: Number
+});
+mongoose.model( 'Measures', measuresSchema );
+
 mongoose.connect( 'mongodb://Acaldas:qweasd@ds043057.mongolab.com:43057/heroku_app26374475' );

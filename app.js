@@ -58,6 +58,8 @@ app.get('/api/muscles', api.muscles);
 app.get('/api/exercises', api.getExercisesStats);
 app.get('/api/getWorkout', api.getWorkout);
 app.post('/api/saveWorkout', api.saveWorkout);
+app.get('/api/getLastMeasure', api.getLastMeasure);
+app.post('/api/saveMeasures', api.saveMeasures);
 
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);

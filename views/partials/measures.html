@@ -1,1 +1,25 @@
-<p>measures</p>
+<form novalidate>
+    <div class="measuresForm row">
+      <div class="field col-lg-2">
+        <h3>Weight</h3>
+        <input type="number" step="any" ng-model="measures.weight"/>
+      </div>
+      <div class="field col-lg-2">
+        <h3>Fat</h3>
+        <input type="number" step="any" ng-model="measures.fat"/>
+      </div>
+      <div class="field col-lg-2">
+        <h3>Muscle</h3>
+        <input type="number" step="any" ng-model="measures.muscle"/>
+      </div>
+      <div class="field col-lg-2">
+        <h3>Water</h3>
+        <input type="number" step="any" ng-model="measures.water"/>
+      </div>
+      <div class="field col-lg-2">
+        <h3>Date</h3>
+        <input type="date" value="{{measures.date | date:dd/mm/yy}}" ng-model="measures.date"/>
+      </div>
+    </div>
+      <button type="submit" id="submitMeasures" class="btn btn-default" ng-click="saveMeasures()">Submit</button>
+</form>
