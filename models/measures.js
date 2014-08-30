@@ -31,3 +31,18 @@ exports.getLastMeasure = function getLastMeasure() {
     });
     return deferred.promise;
  }
+
+ exports.getMeasures = function getLastMeasure() {
+    var Measures = mongoose.model( 'Measures' );
+    var deferred = Q.defer();
+
+     Measures.find().sort('-date').exec( function(err, measures) {
+     if(err){
+        console.log(err);
+        deferred.reject(err);
+    } else {
+        deferred.resolve( measures );
+    }
+    });
+    return deferred.promise;
+ }

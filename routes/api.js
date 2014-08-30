@@ -82,3 +82,12 @@ exports.saveMeasures = function (req, res) {
   });
  });
 };
+
+exports.getMeasures = function (req, res) {
+  measuresdata.getMeasures().then(function(result){
+  res.json({
+    name: "result",
+    result: result
+  });
+ });
+};

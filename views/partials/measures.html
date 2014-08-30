@@ -23,3 +23,24 @@
     </div>
       <button type="submit" id="submitMeasures" class="btn btn-default" ng-click="saveMeasures()">Submit</button>
 </form>
+
+<table class="measuresTable table table-condensed">
+  <tr><th>Weight</th><th>Fat</th><th>Muscle</th><th>Water</th><th>Date</th><th>Weight Diff</th><th>Fat Diff</th><th>Muscle Diff</th><th>Water Diff</th><th>Days</th></tr>
+  <tr ng-repeat="measure in allMeasures">
+    <td>{{measure.weight}}</td>
+    <td>{{measure.fat}}</td>
+    <td>{{measure.muscle}}</td>
+    <td>{{measure.water}}</td>
+    <td>{{measure.date | date : 'dd/MMM/yyyy' }}</td>
+    <td ng-if="!$last" ng-class="{redText: measure.weightDiff < 0, greenText: measure.weightDiff > 0}">{{measure.weightDiff | number : 3}}</td>
+    <td ng-if="!$last" ng-class="{redText: measure.fatDiff > 0, greenText: measure.fatDiff < 0}">{{measure.fatDiff | number : 3}}</td>
+    <td ng-if="!$last" ng-class="{redText: measure.muscleDiff < 0, greenText: measure.muscleDiff > 0}">{{measure.muscleDiff | number : 3}}</td>
+    <td ng-if="!$last" ng-class="{redText: measure.waterDiff < 0, greenText: measure.waterDiff > 0}">{{measure.waterDiff | number : 3}}</td>
+    <td ng-if="!$last">{{measure.days}}</td>
+    <td ng-if="$last"> --- </td>
+    <td ng-if="$last"> --- </td>
+    <td ng-if="$last"> --- </td>
+    <td ng-if="$last"> --- </td>
+    <td ng-if="$last"> --- </td>
+  </tr>
+</table>

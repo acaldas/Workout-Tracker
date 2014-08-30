@@ -107,8 +107,42 @@ angular.module('myApp.controllers', [])
       data: { 'measures' : $scope.measures }
     }).
     success(function (data, status, headers, config) {
-      console.log(data);
+      console.log("Measures saved!");
      });
   };
+
+  $http({
+      method: 'GET',
+      url: '/api/getMeasures'
+    }).
+    success(function (data, status, headers, config) {
+
+      var length = data.result.length;
+      for (var i = 0; i < length-1; i++) {
+        var currentMeasure = data.result[i],
+        lastMeasure = data.result[i+1];
+        currentMeasure.weightDiff = currentMeasure.weight - lastMeasure.weight;
+        currentMeasure.fatDiff = currentMeasure.fat/100 * currentMeasure.weight - lastMeasure.fat/100 * lastMeasure.weight;
+        currentMeasure.muscleDiff = currentMeasure.muscle/100 * currentMeasure.weight - lastMeasure.muscle/100 * lastMeasure.weight;
+        currentMeasure.waterDiff = currentMeasure.water/100 * currentMeasure.weight - lastMeasure.water/100 * lastMeasure.weight;
+        currentMeasure.days = $scope.datesDifference(currentMeasure.date, lastMeasure.date);
+
+        currentMeasure.weightColor = true;
+      }
+      $scope.allMeasures = data.result;
+      console.log(data.result);
+    });
+
+
+    $scope.datesDifference = function (date1, date2) {
+      var d1 = new Date(date1);
+      var d2 = new Date(date2);
+      var miliseconds = d1-d2;
+      var seconds = miliseconds/1000;
+      var minutes = seconds/60;
+      var hours = minutes/60;
+      alert(hours/24);
+      return hours/24;
+    }
 
  }]);
