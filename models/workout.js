@@ -99,6 +99,8 @@ function updateExercise(exercise, lastExercise) {
     if(lastExercise.lastReps >= exercise.reps) {//if it was successfull
         if(exercise.name === "Squats" || exercise.name === "Deadlift")
             exercise.weight = lastExercise.weight + 4;
+        else if(exercise.name === "Leg Curl" || exercise.name === "Leg Extension" || exercise.name === "Lateral Raises" || exercise.name === "Rear Delt Row" || exercise.name === "Skullcrushers" || exercise.name === "Bicep Curls")
+            exercise.weight = lastExercise.weight + 1;
         else
             exercise.weight = lastExercise.weight + 2;
     } else
