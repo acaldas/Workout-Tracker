@@ -11,6 +11,7 @@ var exerciseSchema = new mongoose.Schema({
  muscles: [muscleSchema],
  sets: Number,
  reps: Number,
+ type: Number, //1 - 6-8, 2 - 10-12, 3 - 12-15
  lastReps: Number,
  weight: Number,
  added: Number
@@ -19,6 +20,7 @@ mongoose.model( 'Exercise', exerciseSchema );
 
 var workoutSchema = new mongoose.Schema ({
     date: Date,
+    program: String,
     type: Number,
     exercises: [exerciseSchema]
 });

@@ -141,7 +141,7 @@ angular.module('myApp.controllers', [])
       var seconds = miliseconds/1000;
       var minutes = seconds/60;
       var hours = minutes/60;
-      alert(hours/24);
+
       return hours/24;
     }
 

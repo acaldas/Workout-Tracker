@@ -14,26 +14,24 @@ var Workout = mongoose.model( 'Workout' );
  })// end Muscle.find
 }// end exports.musclelist
 
+
 exports.getWorkoutDay = function getWorkoutDay(callback){
     var Workout = mongoose.model( 'Workout' );
     var Q = require('q');
 
-    Workout.findOne().sort('-date').exec( function(err, lastWorkout) {
+    Workout.findOne({program: 'Upper/Lower'}).sort('-date').exec( function(err, lastWorkout) {
      if(err){
         console.log(err);
   } else {
     var type = 0;
 
-    if(lastWorkout==null)
-        type = 1;
-    else if(lastWorkout.type == 5)
-        type = 0;
-    else
+    if(lastWorkout && lastWorkout.type < 3)
         type = lastWorkout.type + 1;
 
     var workout = new Workout();
+    workout.program = 'Upper/Lower';
     workout.type = type;
-    workout.exercises = days[type];
+    workout.exercises = genericBulkWorkouts[type];
     workout.date = new Date();
     var exercisesToResolve = [];
 
@@ -59,7 +57,10 @@ function getNextExercise( exercise ) {
               } else {
                 if(!result) {
                     exercise.weight = 0;
-                    exercise.lastReps = exercise.reps;
+                    if(exercise.reps)
+                        exercise.lastReps = exercise.reps;
+                    else
+                        typeToReps(exercise);
                 }
                 else {
                     var lastExercise = result.exercises.filter(function (ex) {
@@ -71,26 +72,153 @@ function getNextExercise( exercise ) {
     );
 }
 
+function typeToReps(exercise) {
+
+    switch(exercise.type) {
+        case 1:
+            exercise.sets = 4;
+            exercise.reps = 8;
+            break;
+        case 2:
+            exercise.sets = 3;
+            exercise.reps = 12;
+            break;
+        case 3:
+            exercise.sets = 2;
+            exercise.reps = 15;
+            break;
+    }
+}
+
 function updateExercise(exercise, lastExercise) {
+
+    if(!exercise.reps)
+        typeToReps(exercise);
     exercise.lastReps = lastExercise.lastReps;
 
     if(lastExercise.lastReps >= exercise.reps) {//if it was successfull
-        if(exercise.name === "Bicep Curls") {
-            if(lastExercise.lastReps < 12) {
-                exercise.lastReps += 1;
-                exercise.weight = lastExercise.weight;
-            } else {
-                lastExercise = 8;
-                exercise.weight = lastExercise.weight + 2;
-            }
-        } else
-            exercise.weight = lastExercise.weight + 1;
-
-        if(exercise.name === "Deadlift")
-            exercise.weight += 1;
-    } else if(exercise.name !== "Bicep Curls")//if it was not successfull
-        exercise.weight = Math.ceil(0.9*lastExercise.weight);
+        if(exercise.name === "Squats" || exercise.name === "Deadlift")
+            exercise.weight = lastExercise.weight + 4;
+        else
+            exercise.weight = lastExercise.weight + 2;
+    } else
+        exercise.weight = lastExercise.weight
 }
+
+var genericBulkWorkouts = [
+    [
+        {
+            name: "Squat",
+            type: 1
+        },
+        {
+            name: "SLDL",
+            type: 1
+        },
+        {
+            name: "Hack Squat",
+            type: 2
+        },
+        {
+            name: "Leg Curl",
+            type: 2
+        },
+        {
+            name: "Leg Extension",
+            type: 2
+        },
+        {
+            name: "Standing Barbell Calf",
+            type: 3
+        }
+    ],
+     [
+        {
+            name: "Bench Press",
+            type: 1
+        },
+        {
+            name: "Barbell Row",
+            type: 1
+        },
+        {
+            name: "Incline DB Press",
+            type: 2
+        },
+        {
+            name: "Lateral Raises",
+            type: 3
+        },
+        {
+            name: "Shrugs",
+            type: 2
+        },
+        {
+            name: "Skullcrushers",
+            type: 3
+        },
+        {
+            name: "Bicep Curls",
+            type: 3
+        }
+    ],
+    [
+        {
+            name: "Deadlift",
+            type: 1
+        },
+        {
+            name: "Hack Squat",
+            type: 2
+        },
+        {
+            name: "Leg Curl",
+            type: 2
+        },
+        {
+            name: "Leg Extension",
+            type: 2
+        },
+        {
+            name: "Hip Thrust",
+            type: 2
+        },
+        {
+            name: "Standing Barbell Calf",
+            type: 3
+        }
+    ],
+    [
+        {
+            name: "Overhead Press",
+            type: 1
+        },
+        {
+            name: "One Arm DB Row",
+            type: 2
+        },
+        {
+            name: "DB Press",
+            type: 2
+        },
+        {
+            name: "Flies",
+            type: 2
+        },
+        {
+            name: "Rear Delt Row",
+            type: 2
+        },
+        {
+            name: "Skullcrushers",
+            type: 3
+        },
+        {
+            name: "Bicep Curls",
+            type: 3
+        }
+    ]
+];
 
 var days = [
     [
