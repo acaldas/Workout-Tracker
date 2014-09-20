@@ -14,6 +14,21 @@ var Workout = mongoose.model( 'Workout' );
  })// end Muscle.find
 }// end exports.musclelist
 
+exports.getProgramWorkouts = function getProgramWorkouts(program, callback) {
+    if(!program)
+        callback("Invalid program", {});
+    else {
+         var Workout = mongoose.model( 'Workout' );
+           Workout.find({program: 'Upper/Lower'}).sort('-date').exec( function(err, workouts) {
+            if(err){
+                callback("Invalid program", err);
+            } else {
+                callback("",workouts);
+            }
+        })
+       }
+}
+
 
 exports.getWorkoutDay = function getWorkoutDay(callback){
     var Workout = mongoose.model( 'Workout' );
@@ -46,6 +61,8 @@ exports.getWorkoutDay = function getWorkoutDay(callback){
   }
 });
 }
+
+
 
 function getNextExercise( exercise ) {
     var Workout = mongoose.model( 'Workout' );

@@ -56,6 +56,7 @@ app.get('/partials/:name', routes.partials);
 app.get('/api/name', api.name);
 app.get('/api/muscles', api.muscles);
 app.get('/api/exercises', api.getExercisesStats);
+app.post('/api/getProgramWorkouts', api.getProgramWorkouts);
 app.get('/api/getWorkout', api.getWorkout);
 app.post('/api/saveWorkout', api.saveWorkout);
 app.get('/api/getLastMeasure', api.getLastMeasure);

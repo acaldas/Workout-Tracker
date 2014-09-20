@@ -45,6 +45,13 @@ exports.getWorkout = function (req, res) {
  });
 };
 
+exports.getProgramWorkouts = function (req, res) {
+
+  workoutdata.getProgramWorkouts(req.body.program, function(err, result) {
+    res.json(result);
+  });
+}
+
 exports.saveWorkout = function (req, res) {
   workoutdata.saveWorkout(req.body.workout,function(err,result){
   res.json({

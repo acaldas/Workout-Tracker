@@ -29,6 +29,23 @@ angular.module('myApp.controllers', [])
       getWorkout();
      })
   };
+
+  $scope.getProgramWorkouts = function getProgramWorkouts( name ) {
+    if(name) {
+        $http({
+          method: 'POST',
+          url: '/api/getProgramWorkouts',
+          data: { program: name}
+        }).
+        success(function (data, status, headers, config) {
+          console.log(name + " workouts");
+          console.log(data);
+          $scope.programWorkouts = data;
+       })
+      }
+    }
+    $scope.getProgramWorkouts('Upper/Lower');
+
   }])
   .controller('Progress', ['$scope', '$http', function($scope, $http) {
     $scope.currentTab = 0;
