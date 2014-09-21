@@ -66,5 +66,62 @@ angular.module('myApp.directives', []).
         },
         replace: true
     }
-  })
+  }).
+   directive('workoutsTimeline', [ '_', function( _ )  {
+    return {
+        restrict: "E",
+        scope: {
+            programWorkouts: "=programWorkouts"
+        },
+        link: function(scope, element, attrs) {
+                function getDateStr(date) {
+                    return date.split('T',1);
+                }
+                function addDays(date, days) {
+                    var result = new Date(date);
+                    result.setDate(date.getDate() + days);
+                    return result;
+                }
+                scope.$watch('programWorkouts', function() {
+                    var workouts = scope.programWorkouts;
+                if( workouts && workouts.length) {
+                    var firstDate = new Date(workouts[0].date),
+                        lastDate = new Date();
+
+                    var timeDiff = Math.abs(lastDate.getTime() - firstDate.getTime());
+                    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                    var workoutDays = {};
+                    _.each(workouts,function( workout ) {
+                        switch(workout.type) {
+                            case 0:
+                                workout.day= 'LA'
+                                break;
+                            case 1:
+                                workout.day= 'UA'
+                                break;
+                            case 2:
+                                workout.day= 'LB'
+                                break;
+                            case 3:
+                                workout.day= 'UB'
+                                break;
+                        };
+                        workoutDays[getDateStr(workout.date)] = workout;
+                    });
+
+                    for(var i=0;i<diffDays;i++) {
+                        var currentDate = addDays(firstDate, i);
+                        var currentDateStr = getDateStr(currentDate.toISOString())[0];
+
+                            workoutDays[currentDateStr] = workoutDays[currentDateStr] || false;
+                    }
+
+                    scope.workoutDays = workoutDays;
+                    console.log(workoutDays);
+                }
+            });
+        },
+        templateUrl: 'directives/workoutsTimeline.html'
+    }
+  }])
   ;

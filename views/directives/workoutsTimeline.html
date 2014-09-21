@@ -1,0 +1,14 @@
+<div class="workoutsTimeline">
+    <h3>Workouts Timeline</h3>
+    <div class="day" ng-repeat="(key,workoutDay) in workoutDays" ng-class="{'lastWorkout': (workoutDay.type === 0), 'workoutDay': workoutDay, 'restDay': !workoutDay}">
+        <p class="title">{{key}}</p>
+        <div class="dayContent"/>
+            <div ng-if="workoutDay" >
+            <ul>
+                <li ng-repeat="exercise in workoutDay.exercises">{{exercise.name}}: {{exercise.weight}}*{{exercise.lastReps}}</li>
+            </ul>
+            </div>
+            <p ng-if="!workoutDay">Rest</p>
+        </div>
+    </div>
+</div>

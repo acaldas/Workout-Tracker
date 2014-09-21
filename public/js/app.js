@@ -8,7 +8,8 @@ angular.module('myApp', [
   'myApp.services',
   'myApp.directives',
   'myApp.controllers',
-  'angles'
+  'angles',
+  'underscore'
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/workout', {templateUrl: 'partials/workout.html', controller: 'Workout'});

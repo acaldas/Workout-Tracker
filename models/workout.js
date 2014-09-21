@@ -19,7 +19,7 @@ exports.getProgramWorkouts = function getProgramWorkouts(program, callback) {
         callback("Invalid program", {});
     else {
          var Workout = mongoose.model( 'Workout' );
-           Workout.find({program: 'Upper/Lower'}).sort('-date').exec( function(err, workouts) {
+           Workout.find({program: 'Upper/Lower'}).sort('date').exec( function(err, workouts) {
             if(err){
                 callback("Invalid program", err);
             } else {
