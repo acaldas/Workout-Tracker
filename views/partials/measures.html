@@ -36,11 +36,10 @@
     <td ng-if="!$last" ng-class="{redText: measure.fatDiff > 0, greenText: measure.fatDiff < 0}">{{measure.fatDiff | number : 3}}</td>
     <td ng-if="!$last" ng-class="{redText: measure.muscleDiff < 0, greenText: measure.muscleDiff > 0}">{{measure.muscleDiff | number : 3}}</td>
     <td ng-if="!$last" ng-class="{redText: measure.waterDiff < 0, greenText: measure.waterDiff > 0}">{{measure.waterDiff | number : 3}}</td>
-    <td ng-if="!$last">{{measure.days}}</td>
     <td ng-if="$last"> --- </td>
     <td ng-if="$last"> --- </td>
     <td ng-if="$last"> --- </td>
     <td ng-if="$last"> --- </td>
-    <td ng-if="$last"> --- </td>
+    <td>{{measure.days}}</td>
   </tr>
 </table>

@@ -139,7 +139,10 @@ angular.module('myApp.controllers', [])
         currentMeasure.fatDiff = currentMeasure.fat/100 * currentMeasure.weight - lastMeasure.fat/100 * lastMeasure.weight;
         currentMeasure.muscleDiff = currentMeasure.muscle/100 * currentMeasure.weight - lastMeasure.muscle/100 * lastMeasure.weight;
         currentMeasure.waterDiff = currentMeasure.water/100 * currentMeasure.weight - lastMeasure.water/100 * lastMeasure.weight;
-        currentMeasure.days = $scope.datesDifference(currentMeasure.date, lastMeasure.date);
+        lastMeasure.days = $scope.datesDifference(currentMeasure.date, lastMeasure.date);
+
+        if(i === 0)
+          currentMeasure.days = Math.floor($scope.datesDifference(new Date(), currentMeasure.date));
 
         currentMeasure.weightColor = true;
       }
