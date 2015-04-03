@@ -66,7 +66,7 @@ angular.module('myApp.controllers', [])
 
     $scope.exercises = [];
     $scope.exerciseData = [];
-        $http({
+    $http({
       method: 'GET',
       url: '/api/exercises'
     }).
@@ -104,7 +104,7 @@ angular.module('myApp.controllers', [])
  .controller('Measures', ['$scope', '$http', function($scope, $http) {
 
 
-      $http({
+    $http({
       method: 'GET',
       url: '/api/getLastMeasure'
     }).
@@ -116,40 +116,47 @@ angular.module('myApp.controllers', [])
     $scope.saveMeasures = function saveMeasures() {
       delete $scope.measures._id;
       $http({
-      method: 'POST',
-      url: '/api/saveMeasures',
-      data: { 'measures' : $scope.measures }
-    }).
-    success(function (data, status, headers, config) {
-      console.log("Measures saved!");
-     });
-  };
+        method: 'POST',
+        url: '/api/saveMeasures',
+        data: { 'measures' : $scope.measures }
+      }).
+      success(function (data, status, headers, config) {
+        console.log("Measures saved!");
+        $scope.getMeasures();
+      });
+    };
 
-  $http({
-      method: 'GET',
-      url: '/api/getMeasures'
-    }).
-    success(function (data, status, headers, config) {
 
-      var length = data.result.length;
-      for (var i = 0; i < length-1; i++) {
-        var currentMeasure = data.result[i],
-        lastMeasure = data.result[i+1];
-        currentMeasure.weightDiff = currentMeasure.weight - lastMeasure.weight;
-        currentMeasure.fatDiff = currentMeasure.fat/100 * currentMeasure.weight - lastMeasure.fat/100 * lastMeasure.weight;
-        currentMeasure.muscleDiff = currentMeasure.muscle/100 * currentMeasure.weight - lastMeasure.muscle/100 * lastMeasure.weight;
-        currentMeasure.waterDiff = currentMeasure.water/100 * currentMeasure.weight - lastMeasure.water/100 * lastMeasure.weight;
-        lastMeasure.days = $scope.datesDifference(currentMeasure.date, lastMeasure.date);
+    $scope.getMeasures = function() {
+      $http({
+        method: 'GET',
+        url: '/api/getMeasures'
+      }).
+      success(function (data, status, headers, config) {
 
-        if(i === 0)
-          currentMeasure.days = Math.floor($scope.datesDifference(new Date(), currentMeasure.date));
+        var length = data.result.length;
+        for (var i = 0; i < length-1; i++) {
+          var currentMeasure = data.result[i],
+          lastMeasure = data.result[i+1];
+          currentMeasure.weightDiff = currentMeasure.weight - lastMeasure.weight;
+          currentMeasure.fatDiff = currentMeasure.fat/100 * currentMeasure.weight - lastMeasure.fat/100 * lastMeasure.weight;
+          currentMeasure.muscleDiff = currentMeasure.muscle/100 * currentMeasure.weight - lastMeasure.muscle/100 * lastMeasure.weight;
+          currentMeasure.waterDiff = currentMeasure.water/100 * currentMeasure.weight - lastMeasure.water/100 * lastMeasure.weight;
+          lastMeasure.days = $scope.datesDifference(currentMeasure.date, lastMeasure.date);
 
-        currentMeasure.weightColor = true;
-      }
-      $scope.allMeasures = data.result;
-      console.log(data.result);
-    });
+          if(i === 0)
+            currentMeasure.days = Math.floor($scope.datesDifference(new Date(), currentMeasure.date));
 
+          currentMeasure.weightColor = true;
+        }
+
+        $scope.allMeasures = data.result;
+        console.log(data.result);
+        $scope.drawGraph();
+      });
+    };
+
+    $scope.getMeasures();
 
     $scope.datesDifference = function (date1, date2) {
       var d1 = new Date(date1);
@@ -161,5 +168,36 @@ angular.module('myApp.controllers', [])
 
       return hours/24;
     }
+
+    $scope.chart = {
+        labels : [],
+        datasets : [
+            {
+                fillColor : "rgba(151,187,205,0)",
+                strokeColor : "rgba(240,211,121,1)",
+                pointColor : "rgba(240,211,121,1)",
+                pointStrokeColor : "rgba(240,211,121,0.1)",
+                data : []
+            }
+        ],
+    };
+
+    $scope.options = {
+      scaleStepWidth : 1,
+        bezierCurve : false
+    }
+
+    $scope.drawGraph = function drawGraph(){
+      var measures = $scope.allMeasures.reverse();
+      $scope.chart.labels = [];
+      $scope.chart.datasets[0].data = [];
+      console.log(measures);
+      measures.forEach(function(day) {
+        $scope.chart.labels.push((new Date(day.date)).toDateString());
+        $scope.chart.datasets[0].data.push(day.weight);
+      });
+
+       console.log($scope.chart.datasets[0].data);
+  };
 
  }]);
