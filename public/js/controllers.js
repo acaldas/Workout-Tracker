@@ -188,7 +188,7 @@ angular.module('myApp.controllers', [])
     }
 
     $scope.drawGraph = function drawGraph(){
-      var measures = $scope.allMeasures.reverse();
+      var measures = $scope.allMeasures.slice().reverse();
       $scope.chart.labels = [];
       $scope.chart.datasets[0].data = [];
       console.log(measures);
